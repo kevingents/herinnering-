@@ -57,14 +57,22 @@ export default async function DashboardPage({
         <span className="font-display text-lg tracking-wide text-foreground">
           Everlooms
         </span>
-        <form action={signOut}>
-          <button
-            type="submit"
+        <div className="flex items-center gap-6">
+          <Link
+            href="/account"
             className="text-meta transition-colors hover:text-gold"
           >
-            Uitloggen
-          </button>
-        </form>
+            Account
+          </Link>
+          <form action={signOut}>
+            <button
+              type="submit"
+              className="text-meta transition-colors hover:text-gold"
+            >
+              Uitloggen
+            </button>
+          </form>
+        </div>
       </header>
 
       <div className="mt-16 flex flex-col gap-2">

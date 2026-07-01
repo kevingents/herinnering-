@@ -7,7 +7,10 @@ import { siteUrl } from "@/lib/env";
  * NOTE: the FROM domain (everlooms.app) must be verified in Resend for delivery.
  */
 
-const FROM = process.env.EMAIL_FROM || "Everlooms <hallo@everlooms.app>";
+const FROM =
+  process.env.EMAIL_FROM ||
+  process.env.RESEND_FROM_EMAIL ||
+  "Everlooms <hallo@everlooms.app>";
 
 export function isEmailConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY);
