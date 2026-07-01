@@ -152,7 +152,11 @@ export default async function DelenPage({
             Ze krijgen toegang zodra ze inloggen met dit e-mailadres.
           </p>
           <div className="mt-6">
-            <InviteForm slug={legacy.slug} legacyId={legacy.id} />
+            <InviteForm
+              slug={legacy.slug}
+              legacyId={legacy.id}
+              legacyName={legacy.full_name}
+            />
           </div>
         </Slab>
       ) : (

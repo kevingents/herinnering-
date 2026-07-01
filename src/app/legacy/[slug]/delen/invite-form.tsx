@@ -36,14 +36,17 @@ function SubmitButton() {
 export function InviteForm({
   slug,
   legacyId,
+  legacyName,
 }: {
   slug: string;
   legacyId: string;
+  legacyName: string;
 }) {
   return (
     <form action={inviteMember} className="flex flex-col gap-5">
       <input type="hidden" name="slug" value={slug} />
       <input type="hidden" name="legacyId" value={legacyId} />
+      <input type="hidden" name="legacyName" value={legacyName} />
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">E-mailadres</Label>

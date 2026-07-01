@@ -1,6 +1,7 @@
 "use server";
 
 import { createServiceClient } from "@/lib/supabase/admin";
+import { sendLeadNotification } from "@/lib/email/resend";
 
 type Result = { ok: true } | { error: string };
 
@@ -27,6 +28,7 @@ export async function submitPartnerLead(formData: FormData): Promise<Result> {
       console.error("partner lead insert failed:", error.message);
       return { error: "Er ging iets mis. Probeer het later opnieuw." };
     }
+    await sendLeadNotification({ name, email, organization, phone, message });
     return { ok: true };
   } catch (e) {
     console.error("partner lead failed:", e);

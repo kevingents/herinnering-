@@ -3,8 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { sendInviteEmail } from "@/lib/email/resend";
 
 const ROLES = ["viewer", "contributor", "admin"] as const;
+const ROLE_LABEL: Record<string, string> = {
+  viewer: "meelezen",
+  contributor: "bijdragen",
+  admin: "beheren",
+};
 
 function friendly(message: string): string {
   if (/row-level security|permission|policy|denied/i.test(message)) {
@@ -60,6 +66,15 @@ export async function inviteMember(formData: FormData) {
     console.error("inviteMember failed:", error.message);
     redirect(`${back}?error=${encodeURIComponent(friendly(error.message))}`);
   }
+
+  // Best-effort invitation e-mail (no-op if Resend isn't configured).
+  const legacyName =
+    String(formData.get("legacyName") ?? "").trim() || "een nalatenschap";
+  await sendInviteEmail({
+    to: email,
+    legacyName,
+    roleLabel: ROLE_LABEL[role] ?? "meelezen",
+  });
 
   revalidatePath(back);
   redirect(back);
