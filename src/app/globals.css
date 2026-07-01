@@ -1,0 +1,219 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  ────────────────────────────────────────────────────────────────────────
+  LEVEND GRAF · Design system — "Nachtelijke Natuursteen (Bij Kaarslicht)"
+  A hand-carved monument at night, lit by a single candle.
+  Deep warm graphite stone · scarce antique gold · engraved typography.
+  ────────────────────────────────────────────────────────────────────────
+*/
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* ── Surfaces (warm near-black stone, never blue-cold) ───────────────── */
+  --color-background: #0b0c0e;
+  --color-background-elevated: #101215;
+  --color-surface: #141619;
+  --color-surface-elevated: #1c1f23;
+  --color-overlay: rgba(11, 12, 14, 0.72);
+
+  /* ── Ink (all verified WCAG AA on background) ────────────────────────── */
+  --color-foreground: #ede6d8; /* 15.76:1 */
+  --color-foreground-secondary: #c7bfb0;
+  --color-foreground-muted: #a7a093; /* 7.54:1 */
+
+  /* ── Lines ───────────────────────────────────────────────────────────── */
+  --color-border: #2a2e33;
+  --color-seam: #3a2f22; /* warm inlaid seam */
+
+  /* ── Metals & warmth (gold is scarce currency) ───────────────────────── */
+  --color-gold: #c9a15a; /* 8.13:1 */
+  --color-gold-muted: #8c7343;
+  --color-amber: #e0b876; /* 10.52:1 — voice / living light */
+  --color-sage: #8fa9a3; /* 7.80:1 — success / calm */
+  --color-danger: #c98a6a;
+
+  /* ── shadcn/ui semantic aliases (mapped onto the monument palette) ────── */
+  --color-card: #141619;
+  --color-card-foreground: #ede6d8;
+  --color-popover: #1c1f23;
+  --color-popover-foreground: #ede6d8;
+  --color-primary: #c9a15a;
+  --color-primary-foreground: #0b0c0e;
+  --color-secondary: #1c1f23;
+  --color-secondary-foreground: #ede6d8;
+  --color-muted: #141619;
+  --color-muted-foreground: #a7a093;
+  --color-accent: #1c1f23;
+  --color-accent-foreground: #ede6d8;
+  --color-destructive: #c98a6a;
+  --color-destructive-foreground: #0b0c0e;
+  --color-input: #2a2e33;
+  --color-ring: #c9a15a;
+
+  /* ── Typography (loaded via next/font/google in layout.tsx) ──────────── */
+  --font-display: var(--font-fraunces); /* engraved: names, dates, titles */
+  --font-body: var(--font-newsreader); /* the human reading voice */
+  --font-meta: var(--font-inter); /* tiny functional labels only */
+  --font-sans: var(--font-newsreader);
+  --font-serif: var(--font-newsreader);
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  --radius: 18px;
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: 24px;
+  --radius-slab: 18px;
+  --radius-modal: 24px;
+
+  /* ── Motion (candlelight & settling stone — never bouncy) ────────────── */
+  --ease-stone: cubic-bezier(0.22, 0.61, 0.36, 1); /* entrances */
+  --ease-settle: cubic-bezier(0.4, 0, 0.2, 1); /* state changes */
+
+  /* ── Shadows (soft, grounded, never hard #000) ───────────────────────── */
+  --shadow-slab: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+  --shadow-ambient-gold: 0 0 60px rgba(201, 161, 90, 0.08);
+}
+
+/* Keyframes for ambient, always-alive motion ---------------------------- */
+@theme {
+  --animate-breathe: breathe 6s var(--ease-settle) infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.82;
+    }
+    50% {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate3d(-6%, -3%, 0);
+    }
+    50% {
+      transform: translate3d(6%, 4%, 0);
+    }
+    100% {
+      transform: translate3d(-6%, -3%, 0);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body), Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    /* faint warm vertical settling of the stone */
+    background-image: linear-gradient(180deg, #0b0c0e 0%, #0c0d10 55%, #0a0b0d 100%);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: rgba(201, 161, 90, 0.22);
+    color: #ede6d8;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 380;
+    letter-spacing: -0.015em;
+  }
+
+  /* Focus is warm, never a harsh browser ring */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Prose column for letters, stories, transcripts */
+  .prose-stone {
+    max-width: 62ch;
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--color-foreground-secondary);
+  }
+  .prose-stone p + p {
+    margin-top: 1.35em;
+  }
+}
+
+@utility text-meta {
+  font-family: var(--font-meta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+
+/* Antique gold gilding for names — scarce, one gilded element per screen */
+@utility text-gilded {
+  background: linear-gradient(150deg, #d9ba7e 0%, #c9a15a 48%, #a67c3d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* The inlaid gold seam divider (fades to transparent at both ends) */
+@utility seam {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 161, 90, 0.32) 50%,
+    transparent 100%
+  );
+}
+
+/* A "slab" surface — content inscribed into stone that floats a millimetre off the wall */
+@utility slab {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-slab);
+  box-shadow:
+    var(--shadow-slab),
+    inset 0 1px 0 rgba(237, 230, 216, 0.04);
+}
