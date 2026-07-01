@@ -1,11 +1,17 @@
-# Levend Graf
+# Everloom
 
-> Een heel leven, om te bezoeken.
+> Jouw verhaal. Voor altijd dichtbij.
 
 Een premium web- en (later) mobiele app waarin mensen tijdens hun leven een
 digitale nalatenschap opbouwen — herinneringen, stemmen, verhalen, brieven en
 een AI-interview. Na overlijden blijft dit bestaan als een waardige,
 interactieve herinnering voor familie en vrienden.
+
+**Twee identiteiten:** de publieke **marketingsite** (`/`) is warm en licht
+(cream/sage/forest — het Everloom-merk uit de concept-afbeeldingen); de
+**app** (dashboard, nalatenschap, grafmodus) draagt de donkere, ingetogen
+"Nachtelijke Natuursteen"-sfeer. Beide delen dezelfde tokens in
+[`globals.css`](src/app/globals.css).
 
 **Kernprincipe:** het systeem doet **nooit** alsof iemand nog leeft. Het is
 altijd duidelijk een AI, opgebouwd uit wat de persoon zelf heeft vastgelegd, en
@@ -177,7 +183,9 @@ om het te activeren (model via `ANTHROPIC_MODEL`, standaard `claude-sonnet-5`).
 - ✅ **AI-interview** (`/legacy/[slug]/interview`) — vragenbank + AI-vervolgvragen
 - ✅ **Stem opnemen** (`/legacy/[slug]/stem`) — opnemen per emotie → Storage → playback
 - ✅ **Grafmodus** (`/graf/[code]`) — publieke QR-gedenkplek + eerlijke AI-chat
+- ✅ **Tijdcapsules** (`/legacy/[slug]/tijdcapsules`) — verzegelde berichten voor later
+- ✅ **Everloom-marketingsite** (`/`) — warm/licht merk + rebrand
 - ✅ AI-client (Anthropic, live) + Codemagic/Capacitor-pipeline (scaffolding)
 - ⏳ OAuth-providers + redirect-URLs instellen in Supabase
 - ⏳ App Store: bundle ID bevestigen + Apple-account/secrets in Codemagic
-- ⏳ Features: familieboom, tijdcapsules, foto's/documenten, RAG-embeddings
+- ⏳ Features: familieboom, foto's/documenten, RAG-embeddings; evt. app→licht migreren
