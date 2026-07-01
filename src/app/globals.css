@@ -35,6 +35,18 @@
   --color-sage: #8fa9a3; /* 7.80:1 — success / calm */
   --color-danger: #c98a6a;
 
+  /* ── Everloom marketing (warm light brand) ───────────────────────────── */
+  --color-cream: #f7f4ee;
+  --color-sand: #eadfcb;
+  --color-wheat: #d6c6a3;
+  --color-moss: #a8b08c;
+  --color-forest: #56714e;
+  --color-forest-deep: #3c4b36;
+  --color-clay: #c07d5b;
+  --color-bronze: #8a6e4d;
+  --color-cream-ink: #33332c;
+  --color-cream-muted: #6f6a5c;
+
   /* ── shadcn/ui semantic aliases (mapped onto the monument palette) ────── */
   --color-card: #141619;
   --color-card-foreground: #ede6d8;

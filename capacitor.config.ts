@@ -14,7 +14,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
  */
 const config: CapacitorConfig = {
   appId: process.env.CAP_APP_ID ?? "nl.levendgraf.app",
-  appName: "Levend Graf",
+  appName: "Everloom",
   webDir: "capacitor/www",
   backgroundColor: "#0b0c0e",
   ios: {

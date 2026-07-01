@@ -32,12 +32,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "Levend Graf — Een heel leven, om te bezoeken",
-    template: "%s · Levend Graf",
+    default: "Everloom — Jouw verhaal, voor altijd dichtbij",
+    template: "%s · Everloom",
   },
   description:
-    "Bouw tijdens je leven een digitale nalatenschap van herinneringen, stemmen en verhalen. Na je overlijden blijft het bestaan als een waardige, eerlijke herinnering — nooit alsof je er nog bent.",
-  applicationName: "Levend Graf",
+    "Everloom helpt je om herinneringen, foto's, video's, stemfragmenten en levenslessen vast te leggen, zodat jouw familie je verhaal altijd kan blijven ontdekken.",
+  applicationName: "Everloom",
   keywords: [
     "digitale nalatenschap",
     "herinneringen",
@@ -48,10 +48,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "nl_NL",
-    title: "Levend Graf — Een heel leven, om te bezoeken",
+    title: "Everloom — Jouw verhaal, voor altijd dichtbij",
     description:
-      "Een waardige digitale nalatenschap: herinneringen, stemmen en verhalen, verteld door een herinnering — niet door een verkoper.",
-    siteName: "Levend Graf",
+      "Bewaar je verhaal voor de mensen die van je houden. Herinneringen, foto's, stem en levenslessen — voor altijd dichtbij.",
+    siteName: "Everloom",
   },
   robots: { index: true, follow: true },
 };

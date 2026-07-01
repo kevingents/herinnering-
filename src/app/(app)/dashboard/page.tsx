@@ -51,7 +51,7 @@ export default async function DashboardPage({
       {/* header */}
       <header className="flex items-center justify-between">
         <span className="font-display text-lg tracking-wide text-foreground">
-          Levend&nbsp;Graf
+          Everloom
         </span>
         <form action={signOut}>
           <button

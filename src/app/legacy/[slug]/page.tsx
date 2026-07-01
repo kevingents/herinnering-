@@ -93,6 +93,12 @@ export default async function LegacyPage({
         >
           Grafmodus
         </Link>
+        <Link
+          href={`/legacy/${legacy.slug}/tijdcapsules`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Tijdcapsules
+        </Link>
       </nav>
 
       {error ? (
