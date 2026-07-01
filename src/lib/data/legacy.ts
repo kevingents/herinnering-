@@ -35,6 +35,16 @@ export async function getLegacyBySlug(slug: string): Promise<Legacy | null> {
   return (data as Legacy | null) ?? null;
 }
 
+/** Whether the current user may edit this legacy (owner or active editor). */
+export async function canEditLegacy(legacyId: string): Promise<boolean> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("can_edit_legacy", {
+    p_legacy: legacyId,
+  });
+  if (error) return false;
+  return Boolean(data);
+}
+
 /** Timeline milestones for a legacy, oldest first. */
 export async function getLifeEvents(legacyId: string): Promise<LifeEvent[]> {
   const supabase = await createClient();

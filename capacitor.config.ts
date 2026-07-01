@@ -14,7 +14,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
  */
 const config: CapacitorConfig = {
   appId: process.env.CAP_APP_ID ?? "app.everlooms",
-  appName: "Everloom",
+  appName: "Everlooms",
   webDir: "capacitor/www",
   backgroundColor: "#0b0c0e",
   ios: {

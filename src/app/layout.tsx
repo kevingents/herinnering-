@@ -32,12 +32,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "Everloom — Jouw verhaal, voor altijd dichtbij",
-    template: "%s · Everloom",
+    default: "Everlooms — Jouw verhaal, voor altijd dichtbij",
+    template: "%s · Everlooms",
   },
   description:
-    "Everloom helpt je om herinneringen, foto's, video's, stemfragmenten en levenslessen vast te leggen, zodat jouw familie je verhaal altijd kan blijven ontdekken.",
-  applicationName: "Everloom",
+    "Everlooms helpt je om herinneringen, foto's, video's, stemfragmenten en levenslessen vast te leggen, zodat jouw familie je verhaal altijd kan blijven ontdekken.",
+  applicationName: "Everlooms",
   keywords: [
     "digitale nalatenschap",
     "herinneringen",
@@ -48,10 +48,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "nl_NL",
-    title: "Everloom — Jouw verhaal, voor altijd dichtbij",
+    title: "Everlooms — Jouw verhaal, voor altijd dichtbij",
     description:
       "Bewaar je verhaal voor de mensen die van je houden. Herinneringen, foto's, stem en levenslessen — voor altijd dichtbij.",
-    siteName: "Everloom",
+    siteName: "Everlooms",
   },
   robots: { index: true, follow: true },
 };

@@ -9,8 +9,8 @@ const LEAVES: { x: number; y: number; rot: number; s: number }[] = [
   { x: 24, y: 21, rot: 0, s: 0.72 },
 ];
 
-/** The Everloom mark — a warm gold tree, roots curling into a loom. */
-export function EverloomMark({ className }: { className?: string }) {
+/** The Everlooms mark — a warm gold tree, roots curling into a loom. */
+export function EverloomsMark({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 48 54"
@@ -46,7 +46,7 @@ export function EverloomMark({ className }: { className?: string }) {
 }
 
 /** Mark + wordmark lockup. `tone` sets the wordmark colour. */
-export function EverloomLogo({
+export function EverloomsLogo({
   className,
   tone = "forest",
 }: {
@@ -55,14 +55,14 @@ export function EverloomLogo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <EverloomMark />
+      <EverloomsMark />
       <span
         className={cn(
           "font-display text-[1.6rem] leading-none tracking-[-0.01em]",
           tone === "forest" ? "text-forest-deep" : "text-cream",
         )}
       >
-        Everloom
+        Everlooms
       </span>
     </span>
   );

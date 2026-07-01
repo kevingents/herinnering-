@@ -6,7 +6,7 @@ import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
   title: "Aanmelden",
-  description: "Meld je aan bij Everloom.",
+  description: "Meld je aan bij Everlooms.",
 };
 
 export default async function LoginPage({

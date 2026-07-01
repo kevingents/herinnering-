@@ -1,4 +1,4 @@
-# Everloom
+# Everlooms
 
 > Jouw verhaal. Voor altijd dichtbij.
 
@@ -8,7 +8,7 @@ een AI-interview. Na overlijden blijft dit bestaan als een waardige,
 interactieve herinnering voor familie en vrienden.
 
 **Twee identiteiten:** de publieke **marketingsite** (`/`) is warm en licht
-(cream/sage/forest — het Everloom-merk uit de concept-afbeeldingen); de
+(cream/sage/forest — het Everlooms-merk uit de concept-afbeeldingen); de
 **app** (dashboard, nalatenschap, grafmodus) draagt de donkere, ingetogen
 "Nachtelijke Natuursteen"-sfeer. Beide delen dezelfde tokens in
 [`globals.css`](src/app/globals.css).
@@ -184,7 +184,7 @@ om het te activeren (model via `ANTHROPIC_MODEL`, standaard `claude-sonnet-5`).
 - ✅ **Stem opnemen** (`/legacy/[slug]/stem`) — opnemen per emotie → Storage → playback
 - ✅ **Grafmodus** (`/graf/[code]`) — publieke QR-gedenkplek + eerlijke AI-chat
 - ✅ **Tijdcapsules** (`/legacy/[slug]/tijdcapsules`) — verzegelde berichten voor later
-- ✅ **Everloom-marketingsite** (`/`) — warm/licht merk + rebrand
+- ✅ **Everlooms-marketingsite** (`/`) — warm/licht merk + rebrand
 - ✅ AI-client (Anthropic, live) + Codemagic/Capacitor-pipeline (scaffolding)
 - ⏳ OAuth-providers + redirect-URLs instellen in Supabase
 - ⏳ App Store: bundle ID bevestigen + Apple-account/secrets in Codemagic

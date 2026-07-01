@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { EverloomLogo } from "./logo";
+import { EverloomsLogo } from "./logo";
 
 const NAV = [
   { href: "#hoe-het-werkt", label: "Hoe het werkt" },
@@ -12,8 +12,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-sand/70 bg-cream/85 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6">
-        <Link href="/" aria-label="Everloom home">
-          <EverloomLogo />
+        <Link href="/" aria-label="Everlooms home">
+          <EverloomsLogo />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

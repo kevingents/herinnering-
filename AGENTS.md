@@ -4,16 +4,16 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
-# Everloom — projectregels
+# Everlooms — projectregels
 
 Zie [README.md](README.md) voor de volledige context, stack en backend-setup.
 
 ## Merk & twee identiteiten
-- Product heet **Everloom** ("Jouw verhaal. Voor altijd dichtbij.").
+- Product heet **Everlooms** ("Jouw verhaal. Voor altijd dichtbij.").
 - **Marketingsite** (`/`, `src/components/everloom/*`): warm/licht — tokens
   `bg-cream`, `text-cream-ink`, `text-forest-deep`, `bg-forest`, `text-bronze`,
   `border-sand`, `text-moss`; body `font-meta` (Inter), koppen `font-display`
-  (Fraunces). Tree-logo via `EverloomLogo`/`EverloomMark`.
+  (Fraunces). Tree-logo via `EverloomsLogo`/`EverloomsMark`.
 - **App** (dashboard/legacy/grafmodus): donker "Nachtelijke Natuursteen".
 
 ## Sfeer & design (app)
