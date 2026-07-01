@@ -24,7 +24,7 @@ function SubmitButton({
       className={cn(
         "inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full font-meta text-xs uppercase tracking-[0.14em] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-gold disabled:opacity-50",
         variant === "gold"
-          ? "bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] text-background hover:brightness-105"
+          ? "bg-forest text-cream hover:brightness-105"
           : "border border-border text-foreground-secondary hover:border-gold/50 hover:text-foreground",
         className,
       )}

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { after } from "next/server";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
-import { Candlelight } from "@/components/atmosphere/candlelight";
 import { InscribedName } from "@/components/brand/inscribed-name";
 import { AiDisclaimer } from "@/components/brand/ai-disclaimer";
 import { Seam } from "@/components/ui/seam";
@@ -57,7 +56,6 @@ export default async function GrafPage({
 
   return (
     <>
-      <Candlelight />
       <main className="relative z-10 mx-auto flex min-h-dvh w-full max-w-2xl flex-col items-center px-6 py-16">
         <span
           aria-hidden

@@ -175,7 +175,7 @@ export function VoiceRecorder({
           <button
             type="button"
             onClick={stop}
-            className="inline-flex size-20 items-center justify-center rounded-full bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] text-background transition-all hover:brightness-105"
+            className="inline-flex size-20 items-center justify-center rounded-full bg-forest text-cream transition-all hover:brightness-105"
             aria-label="Stop opname"
           >
             <Square className="size-6" fill="currentColor" />
@@ -189,7 +189,7 @@ export function VoiceRecorder({
               <button
                 type="button"
                 onClick={save}
-                className="inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] px-7 font-meta text-xs uppercase tracking-[0.14em] text-background transition-all hover:brightness-105"
+                className="inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-forest px-7 font-meta text-xs uppercase tracking-[0.14em] text-cream transition-all hover:brightness-105"
               >
                 <Check className="size-4" />
                 Bewaar opname

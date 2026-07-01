@@ -23,7 +23,7 @@ export function InscribedName({
   return (
     <div className={cn("text-center", className)}>
       <motion.h1
-        className="text-gilded font-display text-[clamp(3.5rem,9vw,7.5rem)] leading-[1.02] tracking-[-0.02em]"
+        className="font-display text-[clamp(3.5rem,9vw,7.5rem)] leading-[1.02] tracking-[-0.02em] text-forest-deep"
         initial={
           reduce
             ? { opacity: 0 }
@@ -70,9 +70,9 @@ export function InscribedName({
             y2="0"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#C9A15A" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#C9A15A" />
-            <stop offset="1" stopColor="#C9A15A" stopOpacity="0" />
+            <stop stopColor="#8a6e4d" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#8a6e4d" />
+            <stop offset="1" stopColor="#8a6e4d" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

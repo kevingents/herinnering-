@@ -125,7 +125,7 @@ export default async function InterviewPage({
             ) : null}
             <button
               type="submit"
-              className="inline-flex h-13 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] px-9 font-meta text-[0.8rem] uppercase tracking-[0.14em] text-background transition-all duration-200 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-gold"
+              className="inline-flex h-13 items-center justify-center gap-2.5 rounded-full bg-forest px-9 font-meta text-[0.8rem] uppercase tracking-[0.14em] text-cream transition-all duration-200 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-gold"
             >
               {answered.length > 0 ? "Volgende vraag" : "Begin het interview"}
             </button>

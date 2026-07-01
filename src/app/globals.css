@@ -13,27 +13,27 @@
 
 @theme {
   /* ── Surfaces (warm near-black stone, never blue-cold) ───────────────── */
-  --color-background: #0b0c0e;
-  --color-background-elevated: #101215;
-  --color-surface: #141619;
-  --color-surface-elevated: #1c1f23;
-  --color-overlay: rgba(11, 12, 14, 0.72);
+  --color-background: #f7f4ee;
+  --color-background-elevated: #fffdf8;
+  --color-surface: #fdfbf6;
+  --color-surface-elevated: #ffffff;
+  --color-overlay: rgba(51, 51, 44, 0.45);
 
   /* ── Ink (all verified WCAG AA on background) ────────────────────────── */
-  --color-foreground: #ede6d8; /* 15.76:1 */
-  --color-foreground-secondary: #c7bfb0;
-  --color-foreground-muted: #a7a093; /* 7.54:1 */
+  --color-foreground: #33332c;
+  --color-foreground-secondary: #4a4a42;
+  --color-foreground-muted: #6f6a5c;
 
   /* ── Lines ───────────────────────────────────────────────────────────── */
-  --color-border: #2a2e33;
-  --color-seam: #3a2f22; /* warm inlaid seam */
+  --color-border: #e6ddca;
+  --color-seam: #d6c6a3; /* wheat inlaid seam */
 
   /* ── Metals & warmth (gold is scarce currency) ───────────────────────── */
-  --color-gold: #c9a15a; /* 8.13:1 */
-  --color-gold-muted: #8c7343;
-  --color-amber: #e0b876; /* 10.52:1 — voice / living light */
-  --color-sage: #8fa9a3; /* 7.80:1 — success / calm */
-  --color-danger: #c98a6a;
+  --color-gold: #8a6e4d; /* bronze accent on light */
+  --color-gold-muted: #a08a63;
+  --color-amber: #c07d5b; /* clay — voice / warmth */
+  --color-sage: #7d9488;
+  --color-danger: #a3492c;
 
   /* ── Everloom marketing (warm light brand) ───────────────────────────── */
   --color-cream: #f7f4ee;
@@ -48,22 +48,22 @@
   --color-cream-muted: #6f6a5c;
 
   /* ── shadcn/ui semantic aliases (mapped onto the monument palette) ────── */
-  --color-card: #141619;
-  --color-card-foreground: #ede6d8;
-  --color-popover: #1c1f23;
-  --color-popover-foreground: #ede6d8;
-  --color-primary: #c9a15a;
-  --color-primary-foreground: #0b0c0e;
-  --color-secondary: #1c1f23;
-  --color-secondary-foreground: #ede6d8;
-  --color-muted: #141619;
-  --color-muted-foreground: #a7a093;
-  --color-accent: #1c1f23;
-  --color-accent-foreground: #ede6d8;
-  --color-destructive: #c98a6a;
-  --color-destructive-foreground: #0b0c0e;
-  --color-input: #2a2e33;
-  --color-ring: #c9a15a;
+  --color-card: #fdfbf6;
+  --color-card-foreground: #33332c;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #33332c;
+  --color-primary: #56714e;
+  --color-primary-foreground: #f7f4ee;
+  --color-secondary: #eadfcb;
+  --color-secondary-foreground: #33332c;
+  --color-muted: #efe9dd;
+  --color-muted-foreground: #6f6a5c;
+  --color-accent: #eadfcb;
+  --color-accent-foreground: #33332c;
+  --color-destructive: #a3492c;
+  --color-destructive-foreground: #f7f4ee;
+  --color-input: #e6ddca;
+  --color-ring: #56714e;
 
   /* ── Typography (loaded via next/font/google in layout.tsx) ──────────── */
   --font-display: var(--font-fraunces); /* engraved: names, dates, titles */
@@ -86,8 +86,8 @@
   --ease-settle: cubic-bezier(0.4, 0, 0.2, 1); /* state changes */
 
   /* ── Shadows (soft, grounded, never hard #000) ───────────────────────── */
-  --shadow-slab: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
-  --shadow-ambient-gold: 0 0 60px rgba(201, 161, 90, 0.08);
+  --shadow-slab: 0 20px 45px -25px rgba(60, 75, 54, 0.25);
+  --shadow-ambient-gold: 0 0 50px rgba(138, 110, 77, 0.1);
 }
 
 /* Keyframes for ambient, always-alive motion ---------------------------- */
@@ -126,7 +126,7 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -137,13 +137,13 @@
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
     /* faint warm vertical settling of the stone */
-    background-image: linear-gradient(180deg, #0b0c0e 0%, #0c0d10 55%, #0a0b0d 100%);
+    background-image: linear-gradient(180deg, #f7f4ee 0%, #f4efe6 100%);
     min-height: 100dvh;
   }
 
   ::selection {
-    background: rgba(201, 161, 90, 0.22);
-    color: #ede6d8;
+    background: rgba(86, 113, 78, 0.18);
+    color: #33332c;
   }
 
   h1,
@@ -215,7 +215,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(201, 161, 90, 0.32) 50%,
+    rgba(138, 110, 77, 0.3) 50%,
     transparent 100%
   );
 }
@@ -227,5 +227,5 @@
   border-radius: var(--radius-slab);
   box-shadow:
     var(--shadow-slab),
-    inset 0 1px 0 rgba(237, 230, 216, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }

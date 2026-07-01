@@ -8,7 +8,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         // The scarce, gilded primary action.
-        gold: "bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] text-background shadow-[0_10px_30px_-12px_rgba(201,161,90,0.6)] hover:brightness-105 hover:shadow-[0_14px_36px_-12px_rgba(201,161,90,0.75)]",
+        gold: "bg-forest text-cream shadow-[0_10px_30px_-12px_rgba(201,161,90,0.6)] hover:brightness-105 hover:shadow-[0_14px_36px_-12px_rgba(201,161,90,0.75)]",
         // The quiet "kom binnen" — a gold-outlined action that glows on hover.
         outline:
           "border border-gold/45 text-gold bg-transparent hover:border-gold/80 hover:bg-gold/[0.06] hover:shadow-[0_0_36px_-8px_rgba(201,161,90,0.4)]",

@@ -5,8 +5,8 @@
 #   1. Team settings → Integrations → connect an App Store Connect API key,
 #      and note its name (used below as `CodemagicASC`).
 #   2. App settings → Environment variables → create group "levendgraf_ios":
-#        CAP_APP_ID          = nl.levendgraf.app       (MUST match the Apple bundle ID)
-#        CAP_SERVER_URL      = https://levendgraf.nl    (the deployed production site)
+#        CAP_APP_ID          = app.everlooms            (MUST match the Apple bundle ID)
+#        CAP_SERVER_URL      = https://everlooms.app     (the deployed production site)
 #        APP_STORE_APPLE_ID  = <numeric app id>         (from App Store Connect; optional)
 #   3. In App Store Connect: register the bundle ID and create the app record.
 

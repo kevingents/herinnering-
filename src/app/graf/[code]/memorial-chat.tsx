@@ -126,7 +126,7 @@ export function MemorialChat({
           disabled={sending || !input.trim()}
           aria-label="Verstuur"
           className={cn(
-            "inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] text-background transition-all hover:brightness-105 disabled:opacity-40",
+            "inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-forest text-cream transition-all hover:brightness-105 disabled:opacity-40",
           )}
         >
           <Send className="size-4" />

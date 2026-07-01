@@ -57,8 +57,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0c0e",
-  colorScheme: "dark",
+  themeColor: "#f7f4ee",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -67,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`dark ${fraunces.variable} ${newsreader.variable} ${inter.variable}`}
+      className={`${fraunces.variable} ${newsreader.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh antialiased">

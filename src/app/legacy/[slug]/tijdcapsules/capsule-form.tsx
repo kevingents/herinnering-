@@ -24,7 +24,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-12 items-center justify-center gap-2.5 self-start rounded-full bg-gradient-to-b from-[#d9ba7e] to-[#c9a15a] px-7 font-meta text-xs uppercase tracking-[0.14em] text-background transition-all hover:brightness-105 disabled:opacity-50"
+      className="inline-flex h-12 items-center justify-center gap-2.5 self-start rounded-full bg-forest px-7 font-meta text-xs uppercase tracking-[0.14em] text-cream transition-all hover:brightness-105 disabled:opacity-50"
     >
       {pending ? "Verzegelen…" : (
         <>

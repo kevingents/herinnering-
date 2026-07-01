@@ -9,11 +9,11 @@ import type { CapacitorConfig } from "@capacitor/cli";
  * `capacitor/www` is a minimal loading/offline fallback bundle.
  *
  * Set these in CI (Codemagic env vars), not in code:
- *   CAP_APP_ID       e.g. nl.levendgraf.app   (permanent — must match Apple bundle ID)
- *   CAP_SERVER_URL   e.g. https://levendgraf.nl (the deployed production site)
+ *   CAP_APP_ID       e.g. app.everlooms      (permanent — must match Apple bundle ID)
+ *   CAP_SERVER_URL   e.g. https://everlooms.app (the deployed production site)
  */
 const config: CapacitorConfig = {
-  appId: process.env.CAP_APP_ID ?? "nl.levendgraf.app",
+  appId: process.env.CAP_APP_ID ?? "app.everlooms",
   appName: "Everloom",
   webDir: "capacitor/www",
   backgroundColor: "#0b0c0e",
