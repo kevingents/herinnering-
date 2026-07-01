@@ -26,8 +26,8 @@ export function PhotoUploader({
   const [error, setError] = useState<string | null>(null);
 
   function pick(list: FileList | null) {
-    const picked = Array.from(list ?? []).filter((f) =>
-      f.type.startsWith("image/"),
+    const picked = Array.from(list ?? []).filter(
+      (f) => f.type.startsWith("image/") || f.type.startsWith("video/"),
     );
     if (picked.length === 0) return;
     previews.forEach((p) => URL.revokeObjectURL(p));
@@ -94,21 +94,33 @@ export function PhotoUploader({
           className="flex w-full flex-col items-center gap-3 rounded-2xl border border-dashed border-border py-12 text-foreground-muted transition-colors hover:border-forest/50 hover:text-foreground"
         >
           <ImagePlus className="size-7 text-forest" />
-          <span className="font-body text-base">Kies foto&apos;s om te uploaden</span>
-          <span className="text-meta">JPG, PNG of WebP</span>
+          <span className="font-body text-base">
+            Kies foto&apos;s of video&apos;s om te uploaden
+          </span>
+          <span className="text-meta">JPG, PNG, WebP of MP4</span>
         </button>
       ) : (
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            {previews.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt=""
-                className="aspect-square w-full rounded-xl object-cover"
-              />
-            ))}
+            {previews.map((src, i) =>
+              files[i]?.type.startsWith("video/") ? (
+                <video
+                  key={i}
+                  src={src}
+                  muted
+                  playsInline
+                  className="aspect-square w-full rounded-xl object-cover"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  className="aspect-square w-full rounded-xl object-cover"
+                />
+              ),
+            )}
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -147,7 +159,8 @@ export function PhotoUploader({
               ) : (
                 <>
                   <Upload className="size-4" />
-                  Upload {files.length} foto&apos;s
+                  Upload {files.length}{" "}
+                  {files.length === 1 ? "bestand" : "bestanden"}
                 </>
               )}
             </button>
@@ -167,7 +180,7 @@ export function PhotoUploader({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/*,video/*"
         multiple
         hidden
         onChange={(e) => pick(e.target.files)}

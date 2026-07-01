@@ -6,11 +6,11 @@ import { nl } from "date-fns/locale";
 import { ArrowLeft, ImageIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getLegacyBySlug } from "@/lib/data/legacy";
-import { getPhotos } from "@/lib/data/media";
+import { getGallery } from "@/lib/data/media";
 import { Seam } from "@/components/ui/seam";
 import { PhotoUploader } from "./photo-uploader";
 
-export const metadata: Metadata = { title: "Foto's" };
+export const metadata: Metadata = { title: "Foto's & video's" };
 
 export default async function FotosPage({
   params,
@@ -28,7 +28,7 @@ export default async function FotosPage({
   const legacy = await getLegacyBySlug(slug);
   if (!legacy) notFound();
 
-  const photos = await getPhotos(legacy.id);
+  const items = await getGallery(legacy.id);
 
   return (
     <main className="relative z-10 mx-auto flex min-h-dvh w-full max-w-4xl flex-col px-6 py-10">
@@ -47,12 +47,13 @@ export default async function FotosPage({
         >
           <ImageIcon className="size-5" />
         </span>
-        <span className="text-meta">Foto&apos;s</span>
+        <span className="text-meta">Foto&apos;s &amp; video&apos;s</span>
         <h1 className="mt-4 font-display text-[clamp(2rem,5vw,3rem)] leading-tight tracking-[-0.015em] text-foreground">
           Je mooiste momenten
         </h1>
         <p className="mt-4 max-w-xl font-body text-lg italic leading-relaxed text-foreground-muted">
-          Bewaar de gezichten, plekken en momenten die je nooit wilt vergeten.
+          Bewaar de gezichten, plekken en momenten — in beeld en bewegend beeld —
+          die je nooit wilt vergeten.
         </p>
       </header>
 
@@ -68,16 +69,24 @@ export default async function FotosPage({
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        {photos.length === 0 ? (
+        {items.length === 0 ? (
           <p className="mt-8 text-center font-body text-lg italic text-foreground-muted">
-            Nog geen foto&apos;s. Upload de eerste herinnering.
+            Nog geen foto&apos;s of video&apos;s. Upload de eerste herinnering.
           </p>
         ) : (
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {photos.map((p) => (
+            {items.map((p) => (
               <figure key={p.id} className="flex flex-col gap-2">
                 <div className="overflow-hidden rounded-2xl border border-border bg-surface">
-                  {p.url ? (
+                  {p.url && p.kind === "video" ? (
+                    <video
+                      src={p.url}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="aspect-square w-full bg-black object-cover"
+                    />
+                  ) : p.url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={p.url}

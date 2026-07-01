@@ -7,8 +7,9 @@ type PhotoItem = { path: string; name: string; type: string; size: number };
 type Result = { ok: true } | { error: string };
 
 /**
- * Record already-uploaded photos as media_assets. Files are uploaded directly
- * from the browser to Storage (RLS-enforced); this only writes the rows.
+ * Record already-uploaded photos and videos as media_assets. Files are uploaded
+ * directly from the browser to Storage (RLS-enforced); this only writes the
+ * rows. The media kind is derived from each file's mime type.
  */
 export async function recordPhotos(input: {
   slug: string;
@@ -18,7 +19,7 @@ export async function recordPhotos(input: {
   items: PhotoItem[];
 }): Promise<Result> {
   const { slug, legacyId, caption, takenAt, items } = input;
-  if (!legacyId || !items?.length) return { error: "Geen foto's ontvangen." };
+  if (!legacyId || !items?.length) return { error: "Geen bestanden ontvangen." };
 
   const supabase = await createClient();
   const {
@@ -28,7 +29,7 @@ export async function recordPhotos(input: {
 
   const rows = items.map((it) => ({
     legacy_id: legacyId,
-    kind: "image" as const,
+    kind: it.type.startsWith("video/") ? ("video" as const) : ("image" as const),
     storage_path: it.path,
     file_name: it.name,
     mime_type: it.type,

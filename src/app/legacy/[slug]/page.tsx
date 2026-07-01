@@ -94,6 +94,12 @@ export default async function LegacyPage({
           Foto&apos;s
         </Link>
         <Link
+          href={`/legacy/${legacy.slug}/plekken`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Plekken
+        </Link>
+        <Link
           href={`/legacy/${legacy.slug}/familie`}
           className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
         >
