@@ -84,7 +84,10 @@ AI-functies activeren zodra de bijbehorende secrets zijn ingevuld.
    [`supabase/02_policies.sql`](supabase/02_policies.sql) — foreign key naar
    `auth.users`, de nieuwe-gebruiker-trigger, toegangs-helpers, **Row Level
    Security** op alle tabellen, en de pgvector-index.
-5. (Optioneel) Genereer types:
+5. Seed de interviewvragen:
+   [`supabase/03_seed_interview.sql`](supabase/03_seed_interview.sql)
+   (`node scripts/apply-sql.mjs supabase/03_seed_interview.sql`).
+6. (Optioneel) Genereer types:
    `npx supabase gen types typescript --project-id <ref> > src/lib/supabase/types.ts`.
 
 > **Secrets die je nog moet aanleveren:** Supabase-keys + `DATABASE_URL` (voor de
@@ -167,7 +170,9 @@ om het te activeren (model via `ANTHROPIC_MODEL`, standaard `claude-sonnet-5`).
 - ✅ Fundament + design system + emotionele landingspagina
 - ✅ Backend **live** op Supabase (23 tabellen, RLS, pgvector)
 - ✅ Auth-flow (magic link + OAuth) + beschermd dashboard + eerste `legacy` aanmaken
+- ✅ **Levenslijn** (`/legacy/[slug]`) — gebeurtenissen aanmaken/tonen
+- ✅ **AI-interview** (`/legacy/[slug]/interview`) — vragenbank + AI-vervolgvragen
 - ✅ AI-client (Anthropic) + Codemagic/Capacitor-pipeline (scaffolding)
 - ⏳ OAuth-providers + redirect-URLs instellen in Supabase
 - ⏳ App Store: bundle ID bevestigen + Apple-account/secrets in Codemagic
-- ⏳ Features: levenslijn, AI-interview, stem, grafmodus, familieboom, tijdcapsules
+- ⏳ Features: stem opnemen, grafmodus, familieboom, tijdcapsules
