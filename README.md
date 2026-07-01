@@ -87,7 +87,10 @@ AI-functies activeren zodra de bijbehorende secrets zijn ingevuld.
 5. Seed de interviewvragen:
    [`supabase/03_seed_interview.sql`](supabase/03_seed_interview.sql)
    (`node scripts/apply-sql.mjs supabase/03_seed_interview.sql`).
-6. (Optioneel) Genereer types:
+6. Maak de storage-bucket + policies:
+   [`supabase/04_storage.sql`](supabase/04_storage.sql)
+   (`node scripts/apply-sql.mjs supabase/04_storage.sql`).
+7. (Optioneel) Genereer types:
    `npx supabase gen types typescript --project-id <ref> > src/lib/supabase/types.ts`.
 
 > **Secrets die je nog moet aanleveren:** Supabase-keys + `DATABASE_URL` (voor de
@@ -172,7 +175,8 @@ om het te activeren (model via `ANTHROPIC_MODEL`, standaard `claude-sonnet-5`).
 - ✅ Auth-flow (magic link + OAuth) + beschermd dashboard + eerste `legacy` aanmaken
 - ✅ **Levenslijn** (`/legacy/[slug]`) — gebeurtenissen aanmaken/tonen
 - ✅ **AI-interview** (`/legacy/[slug]/interview`) — vragenbank + AI-vervolgvragen
-- ✅ AI-client (Anthropic) + Codemagic/Capacitor-pipeline (scaffolding)
+- ✅ **Stem opnemen** (`/legacy/[slug]/stem`) — opnemen per emotie → Storage → playback
+- ✅ AI-client (Anthropic, live) + Codemagic/Capacitor-pipeline (scaffolding)
 - ⏳ OAuth-providers + redirect-URLs instellen in Supabase
 - ⏳ App Store: bundle ID bevestigen + Apple-account/secrets in Codemagic
 - ⏳ Features: stem opnemen, grafmodus, familieboom, tijdcapsules
