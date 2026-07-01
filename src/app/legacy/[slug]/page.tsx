@@ -87,6 +87,12 @@ export default async function LegacyPage({
         >
           Stem
         </Link>
+        <Link
+          href={`/legacy/${legacy.slug}/grafmodus`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Grafmodus
+        </Link>
       </nav>
 
       {error ? (
