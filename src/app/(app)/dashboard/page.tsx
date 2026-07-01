@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getMyLegacies } from "@/lib/data/legacies";
+import { claimInvites } from "@/lib/data/members";
 import { signOut } from "@/lib/auth/actions";
 import { Slab } from "@/components/ui/slab";
 import { Seam } from "@/components/ui/seam";
@@ -39,6 +40,9 @@ export default async function DashboardPage({
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+
+  // Link any pending family invites to this account (matched by e-mail).
+  await claimInvites(user.email, user.id);
 
   const legacies = await getMyLegacies();
   const name =
