@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
   BookOpenText,
@@ -99,7 +100,12 @@ export default async function DashboardPage({
           <div className="mt-6 flex flex-col gap-8">
             <div className="grid gap-4 sm:grid-cols-2">
               {legacies.map((l) => (
-                <Slab key={l.id} className="p-7">
+                <Link
+                  key={l.id}
+                  href={`/legacy/${l.slug}`}
+                  className="group block"
+                >
+                  <Slab className="h-full p-7 transition-colors group-hover:border-gold/40">
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden
@@ -117,7 +123,8 @@ export default async function DashboardPage({
                       {l.headline}
                     </p>
                   ) : null}
-                </Slab>
+                  </Slab>
+                </Link>
               ))}
             </div>
 
