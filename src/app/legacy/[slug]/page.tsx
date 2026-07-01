@@ -71,6 +71,18 @@ export default async function LegacyPage({
 
       <Seam className="mt-12 w-full" />
 
+      <nav className="mt-10 flex items-center justify-center gap-3">
+        <span className="rounded-full border border-gold/40 bg-gold/[0.06] px-5 py-2 text-meta text-gold">
+          Levenslijn
+        </span>
+        <Link
+          href={`/legacy/${legacy.slug}/interview`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          AI-interview
+        </Link>
+      </nav>
+
       {error ? (
         <div className="mt-8 rounded-xl border border-danger/40 bg-danger/[0.08] px-5 py-4 font-body text-sm text-foreground-secondary">
           {error}

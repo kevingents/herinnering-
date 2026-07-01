@@ -75,3 +75,34 @@ export async function askMemory(opts: {
   const block = message.content.find((b) => b.type === "text");
   return block && "text" in block ? block.text : "";
 }
+
+/** The AI interviewer: propose ONE next question, building on the conversation. */
+export async function nextInterviewQuestion(opts: {
+  name: string;
+  transcript: { question: string; answer: string }[];
+}): Promise<string> {
+  const { name, transcript } = opts;
+  const convo =
+    transcript.map((t) => `V: ${t.question}\nA: ${t.answer}`).join("\n\n") ||
+    "(nog geen antwoorden)";
+
+  const message = await anthropic().messages.create({
+    model: AI_MODELS.chat,
+    max_tokens: 200,
+    system: [
+      `Je bent een warme, nieuwsgierige interviewer die helpt om het levensverhaal van ${name} vast te leggen.`,
+      "Stel telkens ÉÉN volgende vraag: kort, open en uitnodigend, voortbordurend op wat al is verteld.",
+      "Vraag door naar gevoel, details en betekenis. Herhaal geen eerder gestelde vraag.",
+      "Geef alleen de vraag zelf terug — geen inleiding, geen aanhalingstekens.",
+    ].join("\n"),
+    messages: [
+      {
+        role: "user",
+        content: `Gesprek tot nu toe:\n${convo}\n\nStel de volgende vraag.`,
+      },
+    ],
+  });
+
+  const block = message.content.find((b) => b.type === "text");
+  return block && "text" in block ? block.text.trim() : "";
+}
