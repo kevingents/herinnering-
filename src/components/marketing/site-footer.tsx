@@ -5,7 +5,7 @@ const LINKS = [
   { href: "#waardigheid", label: "Veiligheid" },
   { href: "#waardigheid", label: "Privacy" },
   { href: "#aanwezigheid", label: "Hoe het werkt" },
-  { href: "/begin", label: "Beginnen" },
+  { href: "/login", label: "Beginnen" },
 ];
 
 export function SiteFooter() {

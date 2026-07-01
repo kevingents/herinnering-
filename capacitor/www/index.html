@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Levend Graf</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #0b0c0e;
+        color: #ede6d8;
+        font-family: Georgia, "Times New Roman", serif;
+      }
+      .wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 28px;
+      }
+      .ember {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #e0b876;
+        box-shadow: 0 0 44px 14px rgba(224, 184, 118, 0.32);
+        animation: breathe 6s ease-in-out infinite;
+      }
+      p {
+        opacity: 0.7;
+        letter-spacing: 0.02em;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.82;
+        }
+        50% {
+          transform: scale(1.06);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Offline/loading fallback. The native shell loads the live site via server.url. -->
+    <div class="wrap">
+      <div class="ember"></div>
+      <p>Een heel leven, om te bezoeken…</p>
+    </div>
+  </body>
+</html>

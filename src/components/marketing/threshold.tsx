@@ -35,7 +35,7 @@ export function Threshold() {
           jou nog doorheen wil lopen.
         </p>
         <Link
-          href="/begin"
+          href="/login"
           className={cn(buttonVariants({ variant: "gold", size: "lg" }))}
         >
           Begin jouw nalatenschap

@@ -34,6 +34,10 @@ yarn-error.log*
 .env*
 !.env.example
 
+# capacitor native projects (generated in CI via `cap add`)
+/ios
+/android
+
 # claude code (personal, per-machine)
 .claude/settings.local.json
 

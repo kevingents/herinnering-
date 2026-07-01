@@ -1,0 +1,61 @@
+# Codemagic CI/CD — build the iOS app (Capacitor wrapper) and publish to App Store Connect.
+# Docs: https://docs.codemagic.io/yaml-quick-start/building-a-native-ios-app/
+#
+# ── One-time setup in Codemagic (before the first run) ──────────────────────
+#   1. Team settings → Integrations → connect an App Store Connect API key,
+#      and note its name (used below as `CodemagicASC`).
+#   2. App settings → Environment variables → create group "levendgraf_ios":
+#        CAP_APP_ID          = nl.levendgraf.app       (MUST match the Apple bundle ID)
+#        CAP_SERVER_URL      = https://levendgraf.nl    (the deployed production site)
+#        APP_STORE_APPLE_ID  = <numeric app id>         (from App Store Connect; optional)
+#   3. In App Store Connect: register the bundle ID and create the app record.
+
+workflows:
+  ios-app-store:
+    name: Levend Graf — iOS App Store
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      app_store_connect: CodemagicASC
+    environment:
+      groups:
+        - levendgraf_ios
+      vars:
+        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_SCHEME: "App"
+        BUNDLE_ID: "$CAP_APP_ID"
+      node: 22
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+      - name: Generate & sync the iOS project (Capacitor)
+        script: |
+          npx cap add ios || echo "iOS platform already present"
+          npx cap sync ios
+      - name: Set up code signing
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE --create
+          keychain add-certificates
+          xcode-project use-profiles
+      - name: Set build number
+        script: |
+          cd ios/App
+          LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" 2>/dev/null || echo 0)
+          agvtool new-version -all "$((LATEST + 1))"
+      - name: Build IPA
+        script: |
+          xcode-project build-ipa \
+            --workspace "$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
