@@ -21,6 +21,7 @@ export const profiles = pgTable("profiles", {
   fullName: text(),
   avatarUrl: text(),
   locale: text().default("nl").notNull(),
+  welcomedAt: timestamp({ withTimezone: true }),
   ...timestamps(),
 });
 

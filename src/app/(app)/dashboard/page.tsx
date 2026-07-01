@@ -13,6 +13,7 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import { getMyLegacies } from "@/lib/data/legacies";
 import { claimInvites } from "@/lib/data/members";
+import { sendWelcomeEmail } from "@/lib/email/resend";
 import { signOut } from "@/lib/auth/actions";
 import { Slab } from "@/components/ui/slab";
 import { Seam } from "@/components/ui/seam";
@@ -43,6 +44,22 @@ export default async function DashboardPage({
 
   // Link any pending family invites to this account (matched by e-mail).
   await claimInvites(user.email, user.id);
+
+  // Send a branded welcome e-mail once (on first login).
+  const { data: prof } = await supabase
+    .from("profiles")
+    .select("welcomed_at")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (prof && !(prof as { welcomed_at: string | null }).welcomed_at && user.email) {
+    const ok = await sendWelcomeEmail({ to: user.email });
+    if (ok) {
+      await supabase
+        .from("profiles")
+        .update({ welcomed_at: new Date().toISOString() })
+        .eq("id", user.id);
+    }
+  }
 
   const legacies = await getMyLegacies();
   const name =

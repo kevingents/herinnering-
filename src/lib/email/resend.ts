@@ -67,6 +67,49 @@ async function send(opts: {
   }
 }
 
+/** Branded magic-link (passwordless login) e-mail. Returns whether it sent. */
+export async function sendMagicLinkEmail(opts: {
+  to: string;
+  url: string;
+}): Promise<boolean> {
+  const body = `
+    <p>Klik op de knop hieronder om veilig in te loggen bij Everlooms — geen wachtwoord nodig.</p>
+    <p>Deze link is één uur geldig en werkt maar één keer. Heb je dit niet aangevraagd? Dan kun je deze e-mail rustig negeren.</p>`;
+  const r = await send({
+    to: opts.to,
+    subject: "Je inloglink voor Everlooms",
+    html: shell("Log veilig in", body, {
+      label: "Inloggen bij Everlooms",
+      url: opts.url,
+    }),
+  });
+  return r.ok;
+}
+
+/** Branded welcome/onboarding e-mail (sent once, on first login). */
+export async function sendWelcomeEmail(opts: { to: string }): Promise<boolean> {
+  const url = `${siteUrl()}/dashboard`;
+  const body = `
+    <p>Welkom bij Everlooms — fijn dat je er bent.</p>
+    <p>Everlooms helpt je om je herinneringen, foto's, stem en verhalen vast te leggen, zodat je familie je verhaal voor altijd kan blijven ontdekken. Nooit alsof iemand er nog is — altijd eerlijk, opgebouwd uit wat je zelf vastlegt.</p>
+    <p><strong>Zo begin je:</strong></p>
+    <p>
+      1. Maak een nalatenschap aan — voor jezelf, of voor iemand die je wilt gedenken.<br/>
+      2. Vertel je verhaal via het AI-interview, of voeg foto's, opnames en brieven toe.<br/>
+      3. Nodig familie uit om samen te bouwen.
+    </p>
+    <p>Alles wordt versleuteld en privé bewaard — jij bepaalt wie wat mag zien, en je kunt je gegevens altijd exporteren of definitief verwijderen.</p>`;
+  const r = await send({
+    to: opts.to,
+    subject: "Welkom bij Everlooms",
+    html: shell("Welkom bij Everlooms", body, {
+      label: "Ga naar je dashboard",
+      url,
+    }),
+  });
+  return r.ok;
+}
+
 /** Invitation to a family member to join a legacy. */
 export async function sendInviteEmail(opts: {
   to: string;
