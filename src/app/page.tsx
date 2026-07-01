@@ -169,24 +169,32 @@ const TIMELINE = [
   { year: "1992", text: "Verhuisd naar Laren" },
 ];
 
-const TESTIMONIALS: { quote: string; name: string; role: string }[] = [
+const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  role: string;
+  image: string;
+}[] = [
   {
     quote:
       "Mijn vader is er niet meer, maar zijn stem en verhalen zijn er nog. Mijn kinderen kunnen hem nu écht leren kennen.",
     name: "Sanne de Groot",
     role: "Dochter",
+    image: "/marketing/portrait-3.jpg",
   },
   {
     quote:
       "We hebben samen zijn levensverhaal opgenomen in zijn laatste jaar. Het mooiste wat we ooit hebben gedaan.",
     name: "Familie Bakker",
     role: "Nabestaanden",
+    image: "/marketing/portrait-1.jpg",
   },
   {
     quote:
       "Een foto laat zien waar je was. Everlooms laat zien wíe je was — dat is onbetaalbaar.",
     name: "Rob Jansen",
     role: "Gebruiker sinds 2025",
+    image: "/marketing/portrait-2.jpg",
   },
 ];
 
@@ -309,40 +317,40 @@ export default function EverloomsHome() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15} className="flex justify-center lg:justify-end">
-          <PhoneFrame>
-            <div className="px-4 pb-4">
-              <p className="font-display text-lg text-forest-deep">
-                Mijn levenslijn
-              </p>
-              <div className="mt-4 flex flex-col gap-3.5">
-                {TIMELINE.map((t) => (
-                  <div key={t.year} className="flex items-center gap-3">
-                    <span className="size-2 shrink-0 rounded-full bg-forest" />
-                    <div className="flex flex-1 flex-col">
-                      <span className="font-meta text-[0.7rem] font-medium text-bronze">
-                        {t.year}
-                      </span>
-                      <span className="font-meta text-[0.82rem] text-cream-ink/80">
-                        {t.text}
-                      </span>
+        <Reveal delay={0.15} className="relative mx-auto w-full max-w-xl">
+          <div className="overflow-hidden rounded-3xl border border-sand shadow-[0_40px_80px_-40px_rgba(60,75,54,0.55)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/marketing/hero.jpg"
+              alt="Grootouders en een kleinkind kijken samen naar oude foto's"
+              className="aspect-[4/3] w-full object-cover"
+            />
+          </div>
+          <div className="absolute -bottom-8 -right-3 hidden w-[196px] lg:block">
+            <PhoneFrame>
+              <div className="px-3.5 pb-4">
+                <p className="font-display text-base text-forest-deep">
+                  Mijn levenslijn
+                </p>
+                <div className="mt-3 flex flex-col gap-2.5">
+                  {TIMELINE.slice(0, 3).map((t) => (
+                    <div key={t.year} className="flex items-center gap-2">
+                      <span className="size-1.5 shrink-0 rounded-full bg-forest" />
+                      <div className="flex flex-1 flex-col">
+                        <span className="font-meta text-[0.58rem] font-medium text-bronze">
+                          {t.year}
+                        </span>
+                        <span className="font-meta text-[0.68rem] text-cream-ink/80">
+                          {t.text}
+                        </span>
+                      </div>
+                      <span className="size-7 shrink-0 rounded-md bg-gradient-to-br from-sand to-wheat" />
                     </div>
-                    <span className="size-10 shrink-0 rounded-lg bg-gradient-to-br from-sand to-wheat" />
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-              <div className="mt-5 rounded-xl border border-sand bg-cream/60 px-3 py-2.5">
-                <span className="font-meta text-[0.72rem] text-forest">
-                  + Nieuw interview
-                </span>
-              </div>
-              <div className="mt-4 flex justify-around border-t border-sand pt-3 text-forest/70">
-                {[Waypoints, ImageIcon, Mic, Users].map((Icon, i) => (
-                  <Icon key={i} className="size-4" />
-                ))}
-              </div>
-            </div>
-          </PhoneFrame>
+            </PhoneFrame>
+          </div>
         </Reveal>
       </section>
 
@@ -570,13 +578,12 @@ export default function EverloomsHome() {
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <figcaption className="mt-auto flex items-center gap-3">
-                    <span className="flex size-11 items-center justify-center rounded-full bg-gradient-to-br from-wheat to-sand font-display text-forest-deep">
-                      {t.name
-                        .split(/\s+/)
-                        .slice(0, 2)
-                        .map((w) => w[0])
-                        .join("")}
-                    </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      className="size-11 rounded-full object-cover"
+                    />
                     <span className="flex flex-col">
                       <span className="font-meta text-sm text-cream-ink">{t.name}</span>
                       <span className="font-meta text-xs text-cream-ink/60">{t.role}</span>

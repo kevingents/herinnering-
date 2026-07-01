@@ -97,6 +97,16 @@ export default function UitvaartondernemersPage() {
         </div>
       </section>
 
+      {/* Image band */}
+      <div className="mx-auto max-w-5xl px-6 pb-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/marketing/partner.jpg"
+          alt="Een uitvaartondernemer in een warm, rustig gesprek met een familie"
+          className="aspect-[16/7] w-full rounded-3xl border border-sand object-cover shadow-[0_30px_70px_-40px_rgba(60,75,54,0.5)]"
+        />
+      </div>
+
       {/* Benefits */}
       <section className="border-y border-sand bg-sand/30 py-20">
         <div className="mx-auto max-w-6xl px-6">
