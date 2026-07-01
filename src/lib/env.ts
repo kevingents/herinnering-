@@ -19,6 +19,8 @@ const serverSchema = z.object({
   ANTHROPIC_API_KEY: z.string().min(1).optional(),
   // Betalingen.
   MOLLIE_API_KEY: z.string().min(1).optional(),
+  // Komma-gescheiden lijst van platform-admin e-mailadressen.
+  ADMIN_EMAILS: z.string().optional(),
 });
 
 const publicSchema = z.object({

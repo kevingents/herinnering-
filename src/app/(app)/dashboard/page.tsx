@@ -15,6 +15,7 @@ import { getMyLegacies } from "@/lib/data/legacies";
 import { claimInvites } from "@/lib/data/members";
 import { sendWelcomeEmail } from "@/lib/email/resend";
 import { signOut } from "@/lib/auth/actions";
+import { isAdmin } from "@/lib/auth/admin";
 import { Slab } from "@/components/ui/slab";
 import { Seam } from "@/components/ui/seam";
 import { CreateLegacyForm } from "./create-legacy-form";
@@ -62,6 +63,7 @@ export default async function DashboardPage({
   }
 
   const legacies = await getMyLegacies();
+  const admin = await isAdmin();
   const name =
     (user.user_metadata?.full_name as string | undefined) ||
     user.email?.split("@")[0] ||
@@ -75,6 +77,14 @@ export default async function DashboardPage({
           Everlooms
         </span>
         <div className="flex items-center gap-6">
+          {admin ? (
+            <Link
+              href="/admin"
+              className="text-meta transition-colors hover:text-gold"
+            >
+              Admin
+            </Link>
+          ) : null}
           <Link
             href="/account"
             className="text-meta transition-colors hover:text-gold"
