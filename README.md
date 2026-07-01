@@ -176,7 +176,8 @@ om het te activeren (model via `ANTHROPIC_MODEL`, standaard `claude-sonnet-5`).
 - ✅ **Levenslijn** (`/legacy/[slug]`) — gebeurtenissen aanmaken/tonen
 - ✅ **AI-interview** (`/legacy/[slug]/interview`) — vragenbank + AI-vervolgvragen
 - ✅ **Stem opnemen** (`/legacy/[slug]/stem`) — opnemen per emotie → Storage → playback
+- ✅ **Grafmodus** (`/graf/[code]`) — publieke QR-gedenkplek + eerlijke AI-chat
 - ✅ AI-client (Anthropic, live) + Codemagic/Capacitor-pipeline (scaffolding)
 - ⏳ OAuth-providers + redirect-URLs instellen in Supabase
 - ⏳ App Store: bundle ID bevestigen + Apple-account/secrets in Codemagic
-- ⏳ Features: stem opnemen, grafmodus, familieboom, tijdcapsules
+- ⏳ Features: familieboom, tijdcapsules, foto's/documenten, RAG-embeddings
