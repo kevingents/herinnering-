@@ -62,24 +62,24 @@ const TESTIMONIALS: {
 }[] = [
   {
     quote:
-      "Mijn vader is er niet meer, maar zijn stem en verhalen zijn er nog. Mijn kinderen kunnen hem nu écht leren kennen.",
-    name: "Een dochter",
-    role: "Illustratief voorbeeld",
+      "Ik leg nu zelf mijn verhaal vast — juist de kleine dingen die ik anders zou vergeten. Zodat mijn kleinkinderen me straks echt kennen, en niet alleen van een paar foto's.",
+    name: "Gerrit",
+    role: "Legt zijn verhaal vast",
+    image: "/marketing/portrait-2.jpg",
+  },
+  {
+    quote:
+      "Mijn vader is er niet meer, maar zijn stem en zijn verhalen zijn er nog. Mijn kinderen kunnen hem nu écht leren kennen — in zijn eigen woorden.",
+    name: "Marijke",
+    role: "Dochter",
     image: "/marketing/portrait-3.jpg",
   },
   {
     quote:
-      "We hebben samen zijn levensverhaal opgenomen in zijn laatste jaar. Het mooiste wat we ooit hebben gedaan.",
-    name: "Nabestaanden",
-    role: "Illustratief voorbeeld",
+      "In zijn laatste jaar hebben we samen zijn levensverhaal opgenomen. Het mooiste en meest troostende wat we ooit hebben gedaan.",
+    name: "Anneke",
+    role: "Nabestaande",
     image: "/marketing/portrait-1.jpg",
-  },
-  {
-    quote:
-      "Een foto laat zien waar je was. Everlooms laat zien wíe je was — dat is onbetaalbaar.",
-    name: "Een kleinzoon",
-    role: "Illustratief voorbeeld",
-    image: "/marketing/portrait-2.jpg",
   },
 ];
 
