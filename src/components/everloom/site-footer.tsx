@@ -8,22 +8,23 @@ const COLS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "#hoe-het-werkt", label: "Hoe het werkt" },
       { href: "#functies", label: "Functies" },
       { href: "#prijzen", label: "Prijzen" },
+      { href: "/uitvaartondernemers", label: "Voor uitvaartondernemers" },
     ],
   },
   {
     title: "Over ons",
     links: [
       { href: "#voor-wie", label: "Onze missie" },
-      { href: "#veiligheid", label: "Privacy" },
-      { href: "#", label: "Blog" },
+      { href: "/privacy", label: "Privacy & AVG" },
+      { href: "#faq", label: "Veelgestelde vragen" },
     ],
   },
   {
     title: "Support",
     links: [
-      { href: "#", label: "Helpcenter" },
-      { href: "#", label: "Contact" },
-      { href: "#", label: "Veelgestelde vragen" },
+      { href: "/uitvaartondernemers", label: "Samenwerken" },
+      { href: "/login", label: "Inloggen" },
+      { href: "mailto:hallo@everlooms.app", label: "Contact" },
     ],
   },
 ];

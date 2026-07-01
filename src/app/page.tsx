@@ -22,6 +22,7 @@ import { SiteHeader } from "@/components/everloom/site-header";
 import { SiteFooter } from "@/components/everloom/site-footer";
 import { PhoneFrame } from "@/components/everloom/phone-frame";
 import { Reveal } from "@/components/brand/reveal";
+import { siteUrl } from "@/lib/env";
 
 const FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: MessagesSquare, title: "AI-interviews", body: "Persoonlijke vragen die het gesprek makkelijk maken." },
@@ -168,6 +169,50 @@ const TIMELINE = [
   { year: "1992", text: "Verhuisd naar Laren" },
 ];
 
+const TESTIMONIALS: { quote: string; name: string; role: string }[] = [
+  {
+    quote:
+      "Mijn vader is er niet meer, maar zijn stem en verhalen zijn er nog. Mijn kinderen kunnen hem nu écht leren kennen.",
+    name: "Sanne de Groot",
+    role: "Dochter",
+  },
+  {
+    quote:
+      "We hebben samen zijn levensverhaal opgenomen in zijn laatste jaar. Het mooiste wat we ooit hebben gedaan.",
+    name: "Familie Bakker",
+    role: "Nabestaanden",
+  },
+  {
+    quote:
+      "Een foto laat zien waar je was. Everlooms laat zien wíe je was — dat is onbetaalbaar.",
+    name: "Rob Jansen",
+    role: "Gebruiker sinds 2025",
+  },
+];
+
+const FAQ: { q: string; a: string }[] = [
+  {
+    q: "Wat is Everlooms?",
+    a: "Everlooms helpt je om tijdens je leven je herinneringen, foto's, stem en verhalen vast te leggen, zodat je familie ze voor altijd kan blijven ontdekken.",
+  },
+  {
+    q: "Doet de AI alsof mijn dierbare nog leeft?",
+    a: "Nee. Everlooms is altijd duidelijk een herinnering, opgebouwd uit wat de persoon zelf heeft vastgelegd. Het verzint niets en zegt eerlijk wanneer iets niet bekend is.",
+  },
+  {
+    q: "Wie kan mijn nalatenschap zien?",
+    a: "Jij bepaalt het. Je nodigt zelf familie uit met eigen rechten, en je kunt alles privé houden of juist delen.",
+  },
+  {
+    q: "Wat gebeurt er na mijn overlijden?",
+    a: "Je nabestaanden houden de gedenkplek actief per periode van 5 jaar, in één keer voor 20 jaar, of voor altijd. Er wordt nooit iets verwijderd zonder bericht.",
+  },
+  {
+    q: "Is mijn data veilig en AVG-proof?",
+    a: "Ja. Alles wordt versleuteld bewaard, je kunt je gegevens op elk moment exporteren of verwijderen, en we voldoen aan de AVG/GDPR.",
+  },
+];
+
 function PrimaryLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
@@ -180,8 +225,41 @@ function PrimaryLink({ href, children }: { href: string; children: React.ReactNo
 }
 
 export default function EverloomsHome() {
+  const base = siteUrl();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "Everlooms",
+        url: base,
+        slogan: "Jouw verhaal. Voor altijd dichtbij.",
+      },
+      { "@type": "WebSite", name: "Everlooms", url: base },
+      {
+        "@type": "SoftwareApplication",
+        name: "Everlooms",
+        applicationCategory: "LifestyleApplication",
+        operatingSystem: "Web, iOS",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: FAQ.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="min-h-dvh bg-cream font-meta text-cream-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       {/* Hero */}
@@ -476,20 +554,66 @@ export default function EverloomsHome() {
         </div>
       </section>
 
-      {/* Testimonial */}
-      <section className="pb-24">
-        <div className="mx-auto max-w-4xl px-6">
-          <Reveal>
-            <figure className="rounded-3xl bg-forest-deep px-8 py-14 text-center text-cream sm:px-16">
-              <blockquote className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-snug">
-                &ldquo;Een foto laat zien waar je was. Een verhaal vertelt waarom
-                het belangrijk was.&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 font-meta text-sm text-cream/60">
-                — Familie de Jong
-              </figcaption>
-            </figure>
+      {/* Testimonials */}
+      <section className="border-y border-sand bg-sand/30 py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-[clamp(1.9rem,4vw,2.75rem)] leading-tight tracking-[-0.015em] text-forest-deep">
+              Wat families vertellen
+            </h2>
           </Reveal>
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {TESTIMONIALS.map((t, i) => (
+              <Reveal key={t.name} delay={i * 0.07}>
+                <figure className="flex h-full flex-col gap-6 rounded-2xl border border-sand bg-[#fdfbf6] p-7">
+                  <blockquote className="font-display text-lg leading-relaxed text-forest-deep">
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-auto flex items-center gap-3">
+                    <span className="flex size-11 items-center justify-center rounded-full bg-gradient-to-br from-wheat to-sand font-display text-forest-deep">
+                      {t.name
+                        .split(/\s+/)
+                        .slice(0, 2)
+                        .map((w) => w[0])
+                        .join("")}
+                    </span>
+                    <span className="flex flex-col">
+                      <span className="font-meta text-sm text-cream-ink">{t.name}</span>
+                      <span className="font-meta text-xs text-cream-ink/60">{t.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <Reveal className="text-center">
+            <h2 className="font-display text-[clamp(1.9rem,4vw,2.75rem)] leading-tight tracking-[-0.015em] text-forest-deep">
+              Veelgestelde vragen
+            </h2>
+          </Reveal>
+          <div className="mt-12 flex flex-col divide-y divide-sand">
+            {FAQ.map((f, i) => (
+              <Reveal key={f.q} delay={(i % 3) * 0.05}>
+                <details className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg text-forest-deep">
+                    {f.q}
+                    <span className="text-bronze transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 font-meta text-[0.95rem] leading-relaxed text-cream-ink/75">
+                    {f.a}
+                  </p>
+                </details>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

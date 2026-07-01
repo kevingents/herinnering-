@@ -87,3 +87,14 @@ export const privacyRequests = pgTable(
   },
   (t) => [index("privacy_requests_user_idx").on(t.userId)],
 );
+
+/** B2B partnership leads from uitvaartondernemers (funeral directors). */
+export const partnerLeads = pgTable("partner_leads", {
+  id: primaryId(),
+  organization: text(),
+  name: text().notNull(),
+  email: text().notNull(),
+  phone: text(),
+  message: text(),
+  createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
+});
