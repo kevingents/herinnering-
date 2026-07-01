@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { getMemorialContext } from "@/lib/data/memorial";
+import { getPersona } from "@/lib/data/personality";
 import { askMemory, isAiConfigured } from "@/lib/ai/anthropic";
 
 export type ChatTurn = { role: "user" | "assistant"; content: string };
@@ -35,13 +36,17 @@ export async function askInApp(
     return { answer: "De AI-herinnering is nog niet geconfigureerd." };
   }
 
-  const context = await getMemorialContext(l.id);
+  const [context, persona] = await Promise.all([
+    getMemorialContext(l.id),
+    getPersona(l.id),
+  ]);
   try {
     const answer = await askMemory({
       name: l.full_name,
       question: q,
       context,
       history: Array.isArray(history) ? history.slice(-6) : [],
+      persona,
     });
     return { answer: answer || "Daar heb ik geen herinnering aan." };
   } catch {

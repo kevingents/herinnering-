@@ -1,4 +1,5 @@
 import { createServiceClient } from "@/lib/supabase/admin";
+import type { Persona } from "@/lib/ai/anthropic";
 
 export type Memorial = {
   legacyId: string;
@@ -81,6 +82,37 @@ export async function registerScan(code: string): Promise<void> {
       last_scanned_at: new Date().toISOString(),
     })
     .eq("id", marker.id);
+}
+
+/** Persona (tone only) for the public memorial AI. Service client; never throws. */
+export async function getMemorialPersona(
+  legacyId: string,
+): Promise<Persona | null> {
+  try {
+    const svc = createServiceClient();
+    const { data } = await svc
+      .from("personality_profiles")
+      .select("tone, humor, values, favorite_phrases")
+      .eq("legacy_id", legacyId)
+      .maybeSingle();
+    const row = data as {
+      tone: string | null;
+      humor: string | null;
+      values: unknown;
+      favorite_phrases: unknown;
+    } | null;
+    if (!row) return null;
+    const arr = (v: unknown): string[] =>
+      Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
+    return {
+      tone: row.tone,
+      humor: row.humor,
+      values: arr(row.values),
+      favoritePhrases: arr(row.favorite_phrases),
+    };
+  } catch {
+    return null;
+  }
 }
 
 const CLIP = 800;

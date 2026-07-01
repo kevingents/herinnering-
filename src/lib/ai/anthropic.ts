@@ -30,8 +30,16 @@ export function anthropic(): Anthropic {
   return client;
 }
 
-function systemPrompt(name: string): string {
-  return [
+/** The analysed voice of a person — shapes tone only, never the facts. */
+export type Persona = {
+  tone?: string | null;
+  humor?: string | null;
+  values?: string[] | null;
+  favoritePhrases?: string[] | null;
+};
+
+function systemPrompt(name: string, persona?: Persona | null): string {
+  const lines = [
     `Je bent een respectvolle digitale herinnering aan ${name}.`,
     `Je bent nadrukkelijk GEEN levend persoon en doet NOOIT alsof ${name} er nog is.`,
     "",
@@ -40,7 +48,28 @@ function systemPrompt(name: string): string {
     `- Staat iets niet in de context? Zeg dat eerlijk, bijvoorbeeld: "Dat heb ik niet vastgelegd."`,
     `- Spreek warm en in de eerste persoon zoals ${name} sprak, maar blijf duidelijk een herinnering — geen imitatie die pretendeert te leven.`,
     "- Schrijf in het Nederlands, kort en oprecht.",
-  ].join("\n");
+  ];
+
+  const style: string[] = [];
+  if (persona?.tone) style.push(`- Toon: ${persona.tone}`);
+  if (persona?.humor) style.push(`- Humor: ${persona.humor}`);
+  if (persona?.favoritePhrases?.length) {
+    style.push(
+      `- Kenmerkende uitdrukkingen (spaarzaam en natuurlijk gebruiken): ${persona.favoritePhrases.join("; ")}`,
+    );
+  }
+  if (persona?.values?.length) {
+    style.push(`- Waarden die meespeelden: ${persona.values.join(", ")}`);
+  }
+  if (style.length) {
+    lines.push(
+      "",
+      `Kleur je toon naar hoe ${name} sprak. Dit beïnvloedt ALLEEN de stijl, NOOIT de feiten — verzin nog steeds niets:`,
+      ...style,
+    );
+  }
+
+  return lines.join("\n");
 }
 
 export type MemoryContext = { source: string; content: string }[];
@@ -52,8 +81,9 @@ export async function askMemory(opts: {
   question: string;
   context: MemoryContext;
   history?: ChatTurn[];
+  persona?: Persona | null;
 }): Promise<string> {
-  const { name, question, context, history = [] } = opts;
+  const { name, question, context, history = [], persona } = opts;
 
   const contextBlock = context.length
     ? context.map((c, i) => `[${i + 1}] (${c.source})\n${c.content}`).join("\n\n")
@@ -62,7 +92,7 @@ export async function askMemory(opts: {
   const message = await anthropic().messages.create({
     model: AI_MODELS.chat,
     max_tokens: 1024,
-    system: systemPrompt(name),
+    system: systemPrompt(name, persona),
     messages: [
       ...history,
       {
@@ -105,4 +135,75 @@ export async function nextInterviewQuestion(opts: {
 
   const block = message.content.find((b) => b.type === "text");
   return block && "text" in block ? block.text.trim() : "";
+}
+
+export type PersonaDraft = {
+  summary: string;
+  tone: string;
+  humor: string;
+  values: string[];
+  traits: string[];
+  favoritePhrases: string[];
+  philosophy: string;
+};
+
+function asStringArray(v: unknown): string[] {
+  if (!Array.isArray(v)) return [];
+  return v.filter((x): x is string => typeof x === "string" && x.trim() !== "");
+}
+
+/**
+ * Analyse the digital personality strictly from recorded material. Returns a
+ * structured draft; it infers only what the texts support and never invents.
+ */
+export async function analysePersonality(opts: {
+  name: string;
+  context: MemoryContext;
+}): Promise<PersonaDraft> {
+  const { name, context } = opts;
+  const block = context.length
+    ? context.map((c, i) => `[${i + 1}] (${c.source})\n${c.content}`).join("\n\n")
+    : "(er is nog weinig vastgelegd)";
+
+  const message = await anthropic().messages.create({
+    model: AI_MODELS.deep,
+    max_tokens: 1400,
+    system: [
+      `Je analyseert hoe ${name} was, UITSLUITEND op basis van wat is vastgelegd.`,
+      "Verzin niets. Leid alleen af wat de teksten daadwerkelijk ondersteunen.",
+      "Antwoord met UITSLUITEND geldige JSON — geen uitleg, geen markdown, geen code-fences.",
+      'Schema: {"summary": string, "tone": string, "humor": string, "values": string[], "traits": string[], "favoritePhrases": string[], "philosophy": string}',
+      "summary: 2-3 zinnen. Laat een veld leeg (\"\" of []) als er te weinig basis voor is.",
+      "Alles in het Nederlands.",
+    ].join("\n"),
+    messages: [
+      {
+        role: "user",
+        content: `Vastgelegd materiaal:\n${block}\n\nGeef het JSON-profiel.`,
+      },
+    ],
+  });
+
+  const textBlock = message.content.find((b) => b.type === "text");
+  const raw = textBlock && "text" in textBlock ? textBlock.text : "";
+  const start = raw.indexOf("{");
+  const end = raw.lastIndexOf("}");
+  let parsed: Record<string, unknown> = {};
+  if (start !== -1 && end !== -1 && end > start) {
+    try {
+      parsed = JSON.parse(raw.slice(start, end + 1)) as Record<string, unknown>;
+    } catch {
+      parsed = {};
+    }
+  }
+
+  return {
+    summary: typeof parsed.summary === "string" ? parsed.summary : "",
+    tone: typeof parsed.tone === "string" ? parsed.tone : "",
+    humor: typeof parsed.humor === "string" ? parsed.humor : "",
+    values: asStringArray(parsed.values),
+    traits: asStringArray(parsed.traits),
+    favoritePhrases: asStringArray(parsed.favoritePhrases),
+    philosophy: typeof parsed.philosophy === "string" ? parsed.philosophy : "",
+  };
 }

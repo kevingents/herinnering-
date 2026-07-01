@@ -130,6 +130,12 @@ export default async function LegacyPage({
           Gesprek
         </Link>
         <Link
+          href={`/legacy/${legacy.slug}/persoonlijkheid`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Persoonlijkheid
+        </Link>
+        <Link
           href={`/legacy/${legacy.slug}/zoeken`}
           className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
         >

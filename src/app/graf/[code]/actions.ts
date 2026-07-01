@@ -3,6 +3,7 @@
 import {
   getMemorialByCode,
   getMemorialContext,
+  getMemorialPersona,
 } from "@/lib/data/memorial";
 import { askMemory, isAiConfigured } from "@/lib/ai/anthropic";
 
@@ -28,7 +29,10 @@ export async function askMemorial(
     };
   }
 
-  const context = await getMemorialContext(memorial.legacyId);
+  const [context, persona] = await Promise.all([
+    getMemorialContext(memorial.legacyId),
+    getMemorialPersona(memorial.legacyId),
+  ]);
   const safeHistory = Array.isArray(history) ? history.slice(-6) : [];
 
   try {
@@ -37,6 +41,7 @@ export async function askMemorial(
       question: q,
       context,
       history: safeHistory,
+      persona,
     });
     return { answer: answer || "Daar heb ik geen herinnering aan." };
   } catch {
