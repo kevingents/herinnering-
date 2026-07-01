@@ -55,7 +55,7 @@ export function PartnerLeadForm() {
         placeholder="Waar kunnen we mee helpen?"
         className="w-full rounded-xl border border-sand bg-white px-4 py-3 font-meta text-base leading-relaxed text-cream-ink placeholder:text-cream-ink/40 focus-visible:border-forest/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
       />
-      {error ? <p className="font-meta text-sm text-[#a3492c]">{error}</p> : null}
+      {error ? <p className="font-meta text-sm text-danger">{error}</p> : null}
       <button
         type="submit"
         disabled={status === "sending"}

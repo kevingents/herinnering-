@@ -2,10 +2,10 @@ import Link from "next/link";
 import { EverloomsLogo } from "./logo";
 
 const NAV = [
-  { href: "#hoe-het-werkt", label: "Hoe het werkt" },
-  { href: "#functies", label: "Functies" },
-  { href: "#voor-wie", label: "Voor wie" },
-  { href: "#prijzen", label: "Prijzen" },
+  { href: "/hoe-het-werkt", label: "Hoe het werkt" },
+  { href: "/functies", label: "Functies" },
+  { href: "/veiligheid", label: "Veiligheid" },
+  { href: "/prijzen", label: "Prijzen" },
 ];
 
 export function SiteHeader() {
@@ -18,13 +18,13 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-8 lg:flex">
           {NAV.map((n) => (
-            <a
+            <Link
               key={n.label}
               href={n.href}
               className="font-meta text-sm text-cream-ink/75 transition-colors hover:text-forest"
             >
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

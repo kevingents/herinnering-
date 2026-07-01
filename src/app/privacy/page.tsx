@@ -33,7 +33,7 @@ const SECTIONS: { h: string; body: string[] }[] = [
   {
     h: "4. AI en eerlijkheid",
     body: [
-      "De AI-herinnering antwoordt uitsluitend op basis van wat de persoon zelf heeft vastgelegd. Het doet nooit alsof iemand nog leeft en verzint niets. Voor de AI-functie schakelen we een verwerker in (Anthropic); er worden geen gegevens gebruikt om modellen te trainen.",
+      "De AI-herinnering antwoordt uitsluitend op basis van wat er is vastgelegd. Het doet nooit alsof iemand nog leeft en verzint niets. Voor de AI-functie schakelen we een verwerker in (Anthropic); er worden geen gegevens gebruikt om modellen te trainen.",
     ],
   },
   {

@@ -47,7 +47,35 @@ const IMAGES = [
     size: "landscape_4_3",
     prompt: `Close-up of hands opening a wooden keepsake box filled with old photographs, letters and small mementos on a table, ${STYLE}`,
   },
+  {
+    name: "security",
+    size: "landscape_4_3",
+    prompt: `A warm, calm study with a wooden desk, a small closed keepsake box and framed family photos, soft safe atmosphere of trust and care, ${STYLE}`,
+  },
+  {
+    name: "generations",
+    size: "landscape_4_3",
+    prompt: `A grandmother, her adult daughter and a young grandchild laughing together on a cosy sofa at home, three generations connected, ${STYLE}`,
+  },
+  {
+    name: "writing",
+    size: "landscape_4_3",
+    prompt: `Close-up of an older person's hands writing a heartfelt letter with a pen at a wooden table by a window, ${STYLE}`,
+  },
+  {
+    name: "plek-toen",
+    size: "portrait_4_3",
+    prompt: `A vintage sepia-toned 1960s family photograph with aged film grain and soft faded tones, of a happy young woman about twenty years old in a summer dress standing on a windswept Dutch North Sea beach with grassy dunes and a wooden pier behind her, nostalgic, authentic old snapshot, absolutely no text or logos`,
+  },
+  {
+    name: "plek-nu",
+    size: "portrait_4_3",
+    prompt: `A young woman in her late twenties standing on the same windswept Dutch North Sea beach today, holding up a smartphone to compare an old photograph with the view of the dunes and pier in front of her, tender and moved, ${STYLE}`,
+  },
 ];
+
+const only = process.argv.slice(2);
+const selected = only.length ? IMAGES.filter((i) => only.includes(i.name)) : IMAGES;
 
 const OUT = "public/marketing";
 mkdirSync(OUT, { recursive: true });
@@ -80,7 +108,7 @@ async function gen({ name, prompt, size }) {
   console.log(`OK (${Math.round(bin.length / 1024)} kB)`);
 }
 
-for (const img of IMAGES) {
+for (const img of selected) {
   try {
     await gen(img);
   } catch (e) {

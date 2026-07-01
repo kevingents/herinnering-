@@ -5,18 +5,19 @@ const COLS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Product",
     links: [
-      { href: "#hoe-het-werkt", label: "Hoe het werkt" },
-      { href: "#functies", label: "Functies" },
-      { href: "#prijzen", label: "Prijzen" },
+      { href: "/hoe-het-werkt", label: "Hoe het werkt" },
+      { href: "/functies", label: "Functies" },
+      { href: "/prijzen", label: "Prijzen" },
       { href: "/uitvaartondernemers", label: "Voor uitvaartondernemers" },
     ],
   },
   {
     title: "Over ons",
     links: [
-      { href: "#voor-wie", label: "Onze missie" },
+      { href: "/#voor-wie", label: "Onze missie" },
+      { href: "/veiligheid", label: "Veiligheid" },
       { href: "/privacy", label: "Privacy & AVG" },
-      { href: "#faq", label: "Veelgestelde vragen" },
+      { href: "/#faq", label: "Veelgestelde vragen" },
     ],
   },
   {
