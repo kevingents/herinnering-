@@ -112,6 +112,24 @@ export default async function LegacyPage({
           Tijdcapsules
         </Link>
         <Link
+          href={`/legacy/${legacy.slug}/documenten`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Documenten
+        </Link>
+        <Link
+          href={`/legacy/${legacy.slug}/gesprek`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Gesprek
+        </Link>
+        <Link
+          href={`/legacy/${legacy.slug}/zoeken`}
+          className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
+        >
+          Zoeken
+        </Link>
+        <Link
           href={`/legacy/${legacy.slug}/delen`}
           className="rounded-full border border-border px-5 py-2 text-meta text-foreground-muted transition-colors hover:border-gold/50 hover:text-gold"
         >
